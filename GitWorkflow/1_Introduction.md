@@ -10,7 +10,6 @@ Jedes Projekt enthält daher eine `composer.json` und `composer.lock`, die entsp
 
 
 ## Deployment
-
 Das Deployment für TYPO3-Projekte erfolgt in der Regel über die Extension `typo3/surf`. 
 Das entsprechende Deployment-Script ist im Projekt-Repository enthalten. 
 Entsprechende Credential-Files werden bei Bedarf bereitgestellt.
