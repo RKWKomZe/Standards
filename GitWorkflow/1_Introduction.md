@@ -20,4 +20,4 @@ git merge --no-ff [WHAT_SO_EVER]
 ```
 
 ---
-[Weiterlesen: Branches](2_Branches.md)
+[Weiterlesen: Branches & Merges](2_BranchesMerges.md)

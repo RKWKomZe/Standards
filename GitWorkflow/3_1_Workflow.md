@@ -5,6 +5,7 @@ Der Entwicklungszyklus besteht hier im Kern aus drei Schritten:
 * Abschluss & Going-Live
 ## 1. Entwicklung & technische Abnahme
 ### 1.1 Allgemeine Hinweise
+* **Ein Merge in den Development-Branch ist erst erlaubt, wenn eine explizite technische Freigabe vorliegt.** 
 * Kleinere Änderungen dürfen auf dem Development-Branch direkt commited werden. Für größere Änderungen ist ein entsprechender Sub-Branch abzuzweigen.
 * Der Development-Banch muss immer eine lauffähige Version für die weitere Entwicklung enthalten.
 * Sub-Branches werden **ausschließlich** vom Development-Branch abgezweigt und, nach Abschluss, auch **nur** in diesen gemergt. **Ein Merge des Sub-Branches in den Staging-, Production- oder Master- Branch ist NICHT zulässig.**
@@ -31,7 +32,7 @@ development
 ```
 
 3.) Die Entwicklung auf dem Sub-Branch ist nun abgeschlossen und getestet.
- Erst **nach erfolgter interner Qualitätssicherung** werden die Änderungen in den Development-Branch gemergt.
+ **Nach erfolgter Freigabe** werden die Änderungen in den Development-Branch gemergt.
 
 ```
 development
@@ -44,12 +45,13 @@ development
   │
 [FORTSETZUNG UNTEN]
 ```
-4.) Da der Sub-Branch jetzt obsolet ist, kann er gelöscht werden. 
+4.) Der bisherige Sub-Branch ist damit obsolet und kann gelöscht werden. **Er bleibt daher auch bei künftigen Entwicklungen ab jetzt unverändert.**
 
 > **WICHTIG: Auf dem Sub-Branch werden folglich nach dem Merge keine Änderungen mehr vorgenommen!!!** 
 
 ## 2 Staging & Abnahme
 ### 2.1 Allgemeine Hinweise
+* **Ein Merge in den Staging-Branch ist erst erlaubt, wenn eine explizite technische und gestalterische Freigabe vorliegt.** 
 * Auf dem Staging- Branch erfolgen in der Regel nur kleinere Änderungen als direkte Commits. 
 * Größere Anpassungen erfolgen ausschließlich über den Umweg des Development-Branches mit entsprechenden Sub-Branches.
 
@@ -60,7 +62,7 @@ development
 * Nach der Bereitstellung zeigt sich aber, dass noch weitere Funktionen benötigt werden.
 
 #### 2.2.2 Ablauf 
-1.) Der Development-Branch, welcher den Sub-Branch von oben bereits enthält, wird in den Staging-Branch gemergt.
+1.) Der Development-Branch, welcher den Sub-Branch von oben bereits enthält, wird **nach erfolgter Freigabe** in den Staging-Branch gemergt.
 ```
 development
   ├─────────── feature/function
@@ -99,8 +101,6 @@ development
 3.) Danach wird nun der Staging-Branch in den  Development-Branch zurückgemergt, um diesen wieder auf den neusten Stand zu bringen. 
 Hiermit wäre der Staging-Prozess nun eigentlich abgeschlossen. 
 
-**Der bisherige Feature-Branch ist damit obsolet und kann gelöscht werden.**
-
 ```
 development
   ├─────────── feature/function
@@ -125,6 +125,8 @@ development
 Wie sich zeigt, handelt es sich um größere Änderungswünsche, **daher beginnt nun ein weiter Entwicklungszyklus**.
 
 In diesem Kontext wird ein neuer Sub-Branch `feature/functionTwo` vom Development-Branch abgezweigt. Damit beginnt der Ablauf im Kern wie oben beschrieben erneut.
+
+**Der bisherige Sub-Branch `feature/function` bleibt dabei stets unverändert. Er ist obsolet und kann gelöscht werden.**
 ```
 development
   ├─────────── feature/function
@@ -165,12 +167,11 @@ development
 
 ## 3  Abschluss / Going-Live
 ### 3.1 Allgemeine Hinweise
+* **Ein Merge in den Production-Branch ist erst erlaubt, wenn eine explizite technische, gestalterische und inhaltliche Freigabe vorliegt.** 
 * Auf dem Production- Branch erfolgen in der Regel nur kleinere Änderungen als direkte Commits. 
-* Größere Anpassungen erfolgen hier nicht mehr bzw. würden dafür sorgen, dass der gesamte Entwicklungszyklus von vorne beginnt.
-* **Ein Going-Live ist nur möglich, wenn eine Freigabe durch den "Kunden" vorliegt.** 
-* Nach der Freigabe erfolgen keine größeren Änderungen mehr. Wird dies wider Erwarten doch nötig, so muss der Entwicklungszyklus von vorne durchlaufen werden.
-* Auf dem Master- Branch erfolgen **KEINE** direkten Commits. 
-* Werden kleinere Änderungen nötig, müssen diese über den Production-Branch eingespielt werden - inkl. eines neuen Tags.
+* Größere Anpassungen erfolgen hier schon per Definition nicht mehr bzw. würden dafür sorgen, dass der gesamte Entwicklungszyklus von vorne beginnt.
+* Auf dem Master- Branch erfolgen **NIEMALS** direkte Commits. 
+* Werden dort kleinere Änderungen nötig, müssen diese über den Production-Branch eingespielt werden - inkl. eines neuen Tags.
 
 ### 3.2 Beispiel-Workflow
 #### 3.2.1 Szenario 
@@ -178,7 +179,7 @@ development
 * Nachdem nun alle Funktionen der beiden Features `Function` und `FunctionTwo `integriert sind, sollen die Änderungen nun live gehen.
 
 #### 3.2.2 Ablauf 
-1.) Da der "Kunde" die Freigabe erteilt hat, wird der Staging-Branch, welcher alle Features von oben bereits enthält,  in den Production-Branch gemergt. 
+1.) **Nach erfolgter Freigabe** wird der Staging-Branch, welcher alle Features von oben bereits enthält,  in den Production-Branch gemergt. 
  Ein kleiner Bug wird vor dem Deployment direkt auf dem Production-Branch behoben. Anschließend wird der Branch deployed.
 ```
 development
@@ -311,12 +312,12 @@ development
   ┆                                    ┆                              X deployment
                                                                       │
   ┆                                    X merge ───────────────────────┤
-                                                                      │                              ┆
-  X merge ────────────────────────────────────────────────────────────┤                            master
-                                                                      │                              │          
-                                                                      └───────────────────────────── X merge
-                                                                                                     │
-                                                                                                     X tag
+                                                                      │                       ┆
+  X merge ────────────────────────────────────────────────────────────┤                     master
+                                                                      │                       │          
+                                                                      └────────────────────── X merge
+                                                                                              │
+                                                                                              X tag
 ```
 
 ---
