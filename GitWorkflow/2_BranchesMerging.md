@@ -1,4 +1,4 @@
-# Branches & Merges
+# Branches & Merging
 
 
 ## 1. Branches in Projekten
