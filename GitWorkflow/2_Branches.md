@@ -108,3 +108,6 @@ Wobei `[WHAT_SO_EVER]` durch einen sinnvollen und selbsterklärenden Projektname
 ```
 bugfix/wrongPageRightsOnIssueGeneration
 ```
+
+---
+[Weiterlesen: Workflow](3_Workflow.md)

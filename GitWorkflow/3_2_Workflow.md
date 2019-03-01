@@ -51,3 +51,7 @@ development
 2.) Hiermit ist der Prozess bereits abgeschlossen. Der entsprechende Feature-Branch ist nun obsolet und kann gelöscht werden.
 
 **Werden weitere Features oder Bugfixes an dem gerade integrierten Feature benötigt, so startet damit der Entwicklungsyzyklus erneut. Dies bedeutet auch, dass ggf. neue Sub-Branches angelegt werden müssen.**
+
+
+---
+[Weiterlesen: Tags](4_Tags.md)
