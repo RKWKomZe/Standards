@@ -14,7 +14,7 @@ Neben der technischen Abnahme erfolgt hier allerdings auch die Abnahme durch den
 
 ## 2 Abschluss
 ### 2.1 Allgemeine Hinweise
-* Auf dem Master- Branch erfolgen **KEINE** direkten Commits. 
+* Auf dem Master- Branch erfolgen **KEINE** direkten Commits. **Ausnahme:** Änderungen an `em_conf.php` und `composer.json`
 * Werden Änderungen nötig, müssen diese über den Development-Branch eingespielt werden, d.h. der Entwicklungszyklus beginnt zwangsweise erneut.
 * Größere Anpassungen erfolgen auch dort wiederum ausschließlich über den Umweg entsprechender Sub-Branches.
 
