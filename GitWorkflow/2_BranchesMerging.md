@@ -87,7 +87,7 @@ Als Faustregel für Merges gilt:
 ### 2.1. master
 Der Master-Branch ist der Haupt-Branch. Er enthält den letzten Stand der letzten `stable`-Version des Packages.
 
-> **ACHTUNG: Auf dem Master-Branch erfolgen NIEMALS direkten Commits.**
+> **ACHTUNG: Auf dem Master-Branch erfolgen NIEMALS direkten Commits. Ausnahme: Änderungen an `em_conf.php` und `composer.json`**
 >
 >**ACHTUNG: In diesen Branch darf nur der Development-Branch gemergt werden. Voraussetzung dafür ist ferner, dass eine explizite technische, gestalterische und inhaltliche Freigabe vorliegt.**
 
