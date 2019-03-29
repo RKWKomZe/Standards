@@ -1,6 +1,5 @@
 # Einführung
 Wir setzen ausschließlich GIT für die Versionierung ein.
-
 Alle Projekte werden mit Hilfe von Composer zusammengestellt und verwaltet.
 Jedes Projekt enthält daher eine `composer.json` und `composer.lock`, die entsprechende Packages referenziert.
 
