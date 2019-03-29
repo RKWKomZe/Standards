@@ -3,6 +3,9 @@ Der Entwicklungszyklus besteht hier im Kern aus drei Schritten:
 * Entwicklung & technische Abnahme
 * Staging & Abnahme (durch "Kunden")
 * Abschluss & Going-Live
+
+**WICHTIG: Änderungen an der `composer.json` und `composer.lock` werden, bei korrekter Konfiguration, über die `.gitattributes` und einen entsprechenden merge-driver NICHT automatisch zwischen den Branches zusammengeführt. Dies bedeutet, dass Updates in diesen Dateien pro Branch manuell getätigt werden müssen.**
+
 ## 1. Entwicklung & technische Abnahme
 ### 1.1 Allgemeine Hinweise
 * **Ein Merge in den Development-Branch ist erst erlaubt, wenn eine explizite technische Freigabe vorliegt.** 

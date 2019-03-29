@@ -24,6 +24,7 @@ Wir verwenden folgende Prefixes (=Kategorien) für die Kommentare in Commits:
 * `ADD`: Hinzufügen von Dateien
 * `REMOVE`: Entfernen von Dateien oder Funktionen
 * `UPDATE`: Upate von z.B. Libraries oder Versionen via composer
+* `REFACTORING`: Refactoring von bestehendem Code 
 * `OTHER`: Restkategorie, wenn keine der anderen zutrifft.
 
 Die Prefixes werden in UPPERCASE und in eckigen Klammern vor Kommentarzeilen in Commits gestellt.
