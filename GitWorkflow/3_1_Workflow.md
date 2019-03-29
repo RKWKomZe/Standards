@@ -42,8 +42,6 @@ development
   X commit           X commit
   │                  |
   X merge ───────────┘
-  │
-[FORTSETZUNG UNTEN]
 ```
 4.) Der bisherige Sub-Branch ist damit obsolet und kann gelöscht werden. **Er bleibt daher auch bei künftigen Entwicklungen ab jetzt unverändert.**
 
@@ -122,7 +120,7 @@ development
 ```
 
 4.) Nun erfolgt die Abnahme durch den "Kunden". Hier fallen nun aber weitere Funktionswünsche auf, die vor dem Going-Live implementiert werden sollen.
-Wie sich zeigt, handelt es sich um größere Änderungswünsche, **daher beginnt nun ein weiter Entwicklungszyklus**.
+Wie sich zeigt, handelt es sich um größere Änderungswünsche, **daher beginnt nun ein weiterer Entwicklungszyklus**.
 
 In diesem Kontext wird ein neuer Sub-Branch `feature/functionTwo` vom Development-Branch abgezweigt. Damit beginnt der Ablauf im Kern wie oben beschrieben erneut.
 
