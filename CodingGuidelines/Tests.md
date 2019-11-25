@@ -1,0 +1,98 @@
+# Testing
+
+## Relevante Arten von Tests
+Wir unterscheiden im Wesentlichen drei zentrale Arten von Tests. 
+
+![Test-Pyraminde, Quelle: https://www.softwaretestinghelp.com/the-difference-between-unit-integration-and-functional-testing/](img/tests.png)
+
+* Unit-Tests 
+
+Hierbei werden einzelne Elemente einer Anwendung isoliert (ohne Interaktion mit Abhängigkeiten) getestet, um zu evaluieren, ob der Code korrekt funktioniert.
+Im Regelfall werden hier einzelne Methoden isoliert voneinander getestet. Unit-Tests sind die Basis für Test-Driven-Development.
+Insbesondere dann, wenn eine Methode jedoch wesentlich auf das Zusammenspiel mit Einträgen in der Datenbank angewiesen ist, kann es aber sinnvoll sein, die Ebene des Unit-Tests für diese Methode zu vernachlässigen und direkt in den (Unit-)Integration-Test überzugehen.
+
+* (Unit-)Integration-Tests
+
+Hier wird geprüft, ob verschiedene Einheiten (Units) in Kombination als Gruppe einwandfrei miteinander funktionieren.
+Im Mittelpunkt steht hier also das Zusammenspiel von einzelnen Komponenten. 
+In diesem Sinne sind Integration-Tests bereits abstrakter  als Unit-Tests, können sich aber durchaus auf eine konkrete Methode beziehen, die ihrerseits andere Methoden aufruft.
+
+![Integration Test failed](http://www.lops.io/assets/img/post/automated-testing-functional/meme-unit-tests-passing-no-integration-tests.jpg)
+
+* Functional-Tests
+
+Bei Functional-Tests steht das Funktionieren des gesamten Systems / Moduls im Vordergrund.
+Dies ist die abstrakteste der drei hier genannten Test-Formen. 
+Im Regelfall werden hier technische Anforderungen in Form von Test-Szenarien definiert, deren Erfüllung geprüft wird. Diese Form des Tests setzt daher im Kern keine Kenntnisse über die konkrete Funktionsweise des Codes voraus, sondern lediglich das Wissen darüber, was der Code am Ende machen soll.
+
+
+## Namenskonvention für Test-Methoden
+Um die Benennung der Test-Methoden stringend und übersichtlich zu gestalten, werden folgende allgemeine Regeln definiert:
+* Die Notation des Test-Methoden-Namens erfolgt pinzipiell in lowerCamelCase. Dies entspricht dem Standard im TYPO3-Core, Symfony, ZendFramework und in großen Teilen von Laravel.
+* Um die Lesbarkeit zu erhöhen, wird statt des Präfixes 'test' im Methodennamen ausschließlich die @test- Annotation im Dokumentationsblock der Methode verwendet
+```
+    /**
+     * @test
+     */
+```
+* Sofern sich Tests auf konkrete Einheiten einer Anwendung (=Methoden) beziehen, wird der Name der zu testenden Methode dem Test-Methoden-Namen vorangestellt. Dies trifft im Regelfall auf Unit-Tests, häufig auf (Unit-)Integration-Tests, sollte jedoch nie auf Functional-Tests zutreffen. 
+* Verweisen Tests nicht auf konkrete Einheiten, wird stattdessen das Keyword "it" vorangestellt.
+* Generell orientieren sich die Test-Methoden-Namen an der Logik des Behavior-Driven-Development, d.h. die Test-Methoden-Namen beschreiben, was die Methode (unter den gegebenen Bedingungen) tut. Eine gute Orientierung bietet hier Gherkin (https://cucumber.io/docs/gherkin/reference/).
+    * Wesentlich ist, dass der Test-Methoden-Namen das zu erwartende Verhalten beschreibt und ggf. die dazu notwendige Bedingung enthält.
+    * Die Beschreibung des erwarteten Verhaltens sollte mithilfe von Verben erfolgen und hinreichend konkret sein.  
+
+### Positive Beispiele
+_Unit-Test:_
+```
+clearPageCacheDoesNotConvertPageIdsIfNoneAreSpecified()
+```
+
+### Negative Beispiele
+_Unit-Test:_
+```
+clearPageCacheWorksCorrectly()
+```
+
+## Aufbau eines Tests
+* Innerhalb der Tests ist sich von der Struktur her an Gherkin anzulehnen. Jeder Test enthält daher mindestens drei Teile, die auch entsprechend als Szenario im Test beschrieben werden:
+    * **Given**: definiert die Ausgangsbedingungen für den Test. Dies können entsprechende Vor-Konfigurationen oder aber auch Datensätze in der Datenbank sein. Jeder Test kann mehrere Given-Statements enthalten. Der Zweck von Given-Statements ist es, den bekannten Zustand des Systems zu beschreiben, bevor der Benutzer (oder das externe System) mit der Interaktion mit dem System beginnt (in den When-Statements).  
+    * **When**: definiert die eigentliche Aktion, die durchgeführt wird. Je nach Test-Art ist dies abstrakter oder weniger abstrakt. Jeder Test sollte nur EIN When-Statement enthalten.
+    * **Then**: definiert das erwartete Resultat. Jeder Test kann mehrere Then-Statements enthalten.
+* Für Functional-Tests gilt, dass deren Szenarios so abstrakt formuliert werden sollten, dass von den technischen Details und den internen Abläufen des Codes abstrahiert wird.
+* Natürgemäß sind Unit- und Integration-Tests weniger abstrakt und folglich auch in der Beschreibung der Szenarien technischer als Functional-Test.
+ 
+_Beispiel, Integration-Test, mittlere Abstraktion:_
+```
+/**
+ * @test
+ * @throws \RKW\RkwMailer\Service\Exception\MailServiceException
+ * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+ * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+ */
+public function setQueueMailDoesNotAllowNonPersistentQueueMail()
+{
+    */
+    * Szenario:
+    *
+    * Given MailService is initiated
+    * When a non-persistent queueMail-object is to be set
+    * Then an error is thrown
+    */
+    static::expectException(\RKW\RkwMailer\Service\Exception\MailServiceQueueMailException::class);
+
+    /** @var \RKW\RkwMailer\Domain\Model\QueueMail $queueMail */
+    $queueMail = GeneralUtility::makeInstance(\RKW\RkwMailer\Domain\Model\QueueMail::class);
+    $this->subject->setQueueMail($queueMail);
+}
+```    
+
+## Weitere Hinweise
+* Sofern ein Test auf Fixtures angewiesen ist, werden diese nicht global im TearUp definiert, sondern für die Erhaltung der Übersichtlichkeit im jeweiligen Test geladen.
+* Für jeden Test sind nach Möglichkeit eigene Fixture-Dateien anzulegen. Die Benennung der Dateien ist weitgehend frei, sofern eine Zuordung des Fixture-Files zum Test in irgendeiner Weise möglich bleibt.
+
+## Links
+* https://codeutopia.net/blog/2015/04/11/what-are-unit-testing-integration-testing-and-functional-testing/
+* http://www.lops.io/automated-testing-functional/
+* https://www.softwaretestinghelp.com/the-difference-between-unit-integration-and-functional-testing/
+* https://dannorth.net/introducing-bdd/
+* https://cucumber.io/docs/gherkin/reference/
