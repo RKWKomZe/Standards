@@ -27,7 +27,7 @@ Im Regelfall werden hier technische Anforderungen in Form von Test-Szenarien def
 
 
 ## Namenskonvention für Test-Methoden
-Um die Benennung der Test-Methoden stringend und übersichtlich zu gestalten, werden folgende allgemeine Regeln definiert:
+Um die Benennung der Test-Methoden stringent und übersichtlich zu gestalten, werden folgende allgemeine Regeln definiert:
 * Die Notation des Test-Methoden-Namens erfolgt pinzipiell in lowerCamelCase. Dies entspricht dem Standard im TYPO3-Core, Symfony, ZendFramework und in großen Teilen von Laravel.
 * Um die Lesbarkeit zu erhöhen, wird statt des Präfixes 'test' im Methodennamen ausschließlich die @test- Annotation im Dokumentationsblock der Methode verwendet
 ```
@@ -71,8 +71,8 @@ _Beispiel, Integration-Test, mittlere Abstraktion:_
  */
 public function setQueueMailDoesNotAllowNonPersistentQueueMail()
 {
-    */
-    * Szenario:
+    /**
+    * Scenario:
     *
     * Given MailService is initiated
     * When a non-persistent queueMail-object is to be set
@@ -87,8 +87,31 @@ public function setQueueMailDoesNotAllowNonPersistentQueueMail()
 ```    
 
 ## Weitere Hinweise
-* Sofern ein Test auf Fixtures angewiesen ist, werden diese nicht global im TearUp definiert, sondern für die Erhaltung der Übersichtlichkeit im jeweiligen Test geladen.
-* Für jeden Test sind nach Möglichkeit eigene Fixture-Dateien anzulegen. Die Benennung der Dateien ist weitgehend frei, sofern eine Zuordung des Fixture-Files zum Test in irgendeiner Weise möglich bleibt.
+* Sofern ein Test auf Fixtures angewiesen ist, werden diese nicht global im SetupUp definiert, sondern für die Erhaltung der Übersichtlichkeit im jeweiligen Test geladen.
+* Die XML-Dateien für die Datenbank-Daten sollten nicht nach Tabellennamen, sondern nach Tests aufgeteilt sein, sodass alle Datenbank-Daten (über verschiedene Tabellen) für einen Test (oder einer Gruppe von Tests, die die gleichen Daten verwenden) in einer Datei liegen. Dies verhindert auch versehentliche Überschneidungen in Datensätzen und erhöht die Übersichtlichkeit.
+* Die Benennung der Dateien ist weitgehend frei, sofern eine Zuordung des Fixture-Files zum Test in irgendeiner Weise möglich bleibt.
+* Folgende Ordner-Struktur hat sich bewährt (Beispiel aus TYPO3)
+```
+Tests
+    Integration
+        Orders  (analog zu "Classes")
+            Database (= XML-Files für die Tests)
+                Global.xml (= enthält allgemeine Datenbank-Einträge, die in SetUp benötigt werden, z.B. die Rootpage)
+                Test10.xml (= enthält Datenban-Einträge für den ersten Test) 
+                Test20.xml ....
+                [...]
+            Frontend
+                Configuration
+                    Rootpage.typoscript (= Rootpage-Setup)
+                Templates (= enthält Templates für das Frontend
+                    
+```
+
+Inhalt Global.xml (Beispiel)
+```
+
+
+```
 
 ## Links
 * https://codeutopia.net/blog/2015/04/11/what-are-unit-testing-integration-testing-and-functional-testing/
