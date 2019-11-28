@@ -5,7 +5,7 @@ Wir unterscheiden im Wesentlichen drei zentrale Arten von Tests.
 
 ![Test-Pyramide, Quelle: https://www.softwaretestinghelp.com/the-difference-between-unit-integration-and-functional-testing/](img/tests.png)
 
-* Unit-Tests 
+### Unit-Tests 
 
 Hierbei werden einzelne Elemente einer Anwendung isoliert (ohne Interaktion mit Abhängigkeiten) getestet, um zu evaluieren, ob der Code korrekt funktioniert.
 
@@ -13,7 +13,7 @@ Im Regelfall werden hier einzelne Methoden isoliert voneinander getestet. Unit-T
 
 Insbesondere dann, wenn eine Methode jedoch wesentlich auf das Zusammenspiel mit Einträgen in der Datenbank angewiesen ist, kann es aber sinnvoll sein, die Ebene des Unit-Tests für diese Methode zu vernachlässigen und direkt in den (Unit-)Integration-Test überzugehen. Denkbar ist auf Basis dieses Verständnisses auch, (Unit-)Integration-Tests bevorzugt zu behandeln, da mit ihrer Hilfe auch Features der Software klarer formuliert und entsprechende Testszenarien skizziert werden können. Wenn sich aus den (Unit-)Integration-Tests ergibt, dass etwa eine komplexere Funktion als isoliertes Unit korrekt ausgeführt sein muss, so implementiert man zuerst diesen Unit-Test, bevor man sich wieder dem (Unit-)Integration-Test zuwendet. 
 
-* (Unit-)Integration-Tests
+### (Unit-)Integration-Tests
 
 Hier wird geprüft, ob verschiedene Einheiten (Units) in Kombination als Gruppe einwandfrei miteinander funktionieren.
 
@@ -25,7 +25,7 @@ An dieser Stelle gilt es, ebenso wie bei den Unit-Tests, darauf hinzuweisen, das
 
 ![Integration Test failed](http://www.lops.io/assets/img/post/automated-testing-functional/meme-unit-tests-passing-no-integration-tests.jpg)
 
-* Functional-Tests
+### Functional-Tests
 
 Bei Functional-Tests steht das Funktionieren des gesamten Systems / Moduls im Vordergrund.
 
@@ -33,7 +33,7 @@ Dies ist die abstrakteste der drei hier genannten Test-Formen.
 
 Im Regelfall werden hier technische Anforderungen in Form von Test-Szenarien definiert, deren Erfüllung geprüft wird. Diese Form des Tests setzt daher im Kern keine Kenntnisse über die konkrete Funktionsweise des Codes voraus, sondern lediglich das Wissen darüber, was der Code am Ende machen soll.
 
-Diese Art Tests kann im Falle von Websites auch durchaus über automatisierte Browser erfolgen, da sie im Wesentlichen das Verhalten eines echten Benutzers simulieren sollen (z. B. [Laravel Dusk](https://laravel.com/docs/5.8/dusk), )
+Diese Art Tests kann im Falle von Websites auch durchaus über automatisierte Browser erfolgen, da sie im Wesentlichen das Verhalten eines echten Benutzers simulieren sollen (z. B. [Laravel Dusk](https://laravel.com/docs/5.8/dusk))
 
 
 ## Namenskonvention für Test-Methoden
