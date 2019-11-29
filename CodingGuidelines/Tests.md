@@ -31,10 +31,13 @@ Bei Functional-Tests steht das Funktionieren des gesamten Systems / Moduls im Vo
 
 Dies ist die abstrakteste der drei hier genannten Test-Formen. 
 
-Im Regelfall werden hier technische Anforderungen in Form von Test-Szenarien definiert, deren Erfüllung geprüft wird. Diese Form des Tests setzt daher im Kern keine Kenntnisse über die konkrete Funktionsweise des Codes voraus, sondern lediglich das Wissen darüber, was der Code am Ende machen soll.
+Im Regelfall werden hier technische Anforderungen in Form von Test-Szenarien definiert, deren Erfüllung geprüft wird. Diese Form des Tests setzt daher im Kern keine Kenntnisse über die konkrete Funktionsweise des Codes voraus, sondern lediglich das Wissen darüber, was der Code am Ende machen soll. Das bedeutet, dass diese Tests das Verhalten und die Erwartung eines echten Nutzers simulieren sollen.
 
-Diese Art Tests kann im Falle von Websites auch durchaus über automatisierte Browser erfolgen, da sie im Wesentlichen das Verhalten eines echten Benutzers simulieren sollen (z. B. [Laravel Dusk](https://laravel.com/docs/5.8/dusk))
+Diese Tests führen stellvertretend für den Nutzer eine Anfrage an das System durch und prüfen die Antwort auf die gesetzten Erwartungen. Diese Anfrage kann entweder als HTTP-Request im Rahmen des genutzten Frameworks selbst erfolgen oder wie im Falle von zum Beispiel [Laravel Dusk](https://laravel.com/docs/5.8/dusk) auch als echte Anfrage via Browser.
 
+Da diese Art der Testung als oberste Abstraktionsebene der Formulierung eines Features am nächsten kommt, kann dies auch Ausgangspunkt des Test Driven Development sein. 
+
+Die Testung über einen echten Browser wie im Falle von Laravel Dusk oder Selenium, ... bietet zudem die Möglichkeit, das Interface auch dann zu testen, wenn es in wesentlichen Elementen oder vollständig per Javascript erst im Browser selbst gerendert wird.
 
 ## Namenskonvention für Test-Methoden
 Um die Benennung der Test-Methoden stringent und übersichtlich zu gestalten, werden folgende allgemeine Regeln definiert:
