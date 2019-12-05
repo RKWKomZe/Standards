@@ -86,11 +86,14 @@ public function setQueueMailDoesNotAllowNonPersistentQueueMail()
 }
 ```    
 
-## Weitere Hinweise
+## Aufbau und Struktur
 * Sofern ein Test auf Fixtures angewiesen ist, werden diese nicht global im SetupUp definiert, sondern für die Erhaltung der Übersichtlichkeit im jeweiligen Test geladen.
 * Die XML-Dateien für die Datenbank-Daten sollten nicht nach Tabellennamen, sondern nach Tests aufgeteilt sein, sodass alle Datenbank-Daten (über verschiedene Tabellen) für einen Test (oder einer Gruppe von Tests, die die gleichen Daten verwenden) in einer Datei liegen. Dies verhindert auch versehentliche Überschneidungen in Datensätzen und erhöht die Übersichtlichkeit.
 * Die Benennung der Dateien ist weitgehend frei, sofern eine Zuordung des Fixture-Files zum Test in irgendeiner Weise möglich bleibt.
-* Folgende Ordner-Struktur hat sich bewährt (Beispiel aus TYPO3)
+* Die im nachfolgenden Beispiel gezeigte Ordner-Struktur hat sich bewährt 
+
+### Beispiel: TYPO3 Integration-Test
+#### Ordnerstruktur
 ```
 Tests
     Integration
@@ -104,14 +107,116 @@ Tests
                 Configuration
                     Rootpage.typoscript (= Rootpage-Setup)
                 Templates (= enthält Templates für das Frontend
-                    
+            OrderManagerTest.php (= Test-File)
 ```
 
-Inhalt Global.xml (Beispiel)
+#### Inhalt: Test/Integration/Orders/Database/Global.xml
+```
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <pages>
+        <uid>1</uid>
+        <pid>0</pid>
+        <title>Rootpage</title>
+        <tx_rkwbasics_teaser_text />
+        <tx_rkwbasics_information />
+        <doktype>1</doktype>
+        <perms_everybody>15</perms_everybody>
+    </pages>
+</dataset>
 ```
 
+#### Inhalt: Test/Integration/Orders/Database/Check40.xml
+```
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <tx_rkwshop_domain_model_product>
+        <uid>1</uid>
+        <pid>1</pid>
+        <title>Leitfaden deluxe</title>
+        <subtitle>Mit Unterüberschriften kann man alles länger machen</subtitle>
+        <admin_email>test3@test.de</admin_email>
+        <stock>1</stock>
+        <backend_user />
+    </tx_rkwshop_domain_model_product>
+    <tx_rkwshop_domain_model_stock>
+        <uid>1</uid>
+        <pid>1</pid>
+        <product>1</product>
+        <amount>100</amount>
+        <comment>Auf- und Unterlage</comment>
+    </tx_rkwshop_domain_model_stock>
+</dataset>
+```
+#### Eigentlicher Test aus Test/Integration/Orders/OrderManagerTest.php
+```
+/**
+     * @test
+     * @throws \RKW\RkwShop\Exception
+     * @throws \RKW\RkwRegistration\Exception
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     * @throws \TYPO3\CMS\Core\Type\Exception\InvalidEnumerationValueException
+     * @throws \Exception
+     */
+    public function createOrderCreatesRegistrationIfUserIsNotLoggedIn ()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given I'm not logged in
+         * Given I accept the Terms & Conditions
+         * Given I accept the Privacy-Terms
+         * Given I enter a valid shippingAddress
+         * Given an product is ordered with amount greater than zero
+         * When I place an order
+         * Then the order is saved as registration
+         */
+        $this->importDataSet(__DIR__ . '/Fixtures/Database/Check40.xml');
+
+        /** @var \RKW\RkwShop\Domain\Model\Order $order */
+        $order = GeneralUtility::makeInstance(Order::class);
+        $order->setEmail('email@rkw.de');
+
+        /** @var \RKW\RkwShop\Domain\Model\ShippingAddress $shippingAddress */
+        $shippingAddress = GeneralUtility::makeInstance(ShippingAddress::class);
+        $shippingAddress->setAddress('Emmenthaler Allee 15');
+        $shippingAddress->setZip('12345');
+        $shippingAddress->setCity('Gauda');
+        $order->setShippingAddress($shippingAddress);
+
+        /** @var \RKW\RkwShop\Domain\Model\Product $product */
+        $product = $this->productRepository->findByUid(1);
+
+        /** @var \RKW\RkwShop\Domain\Model\OrderItem $orderItem */
+        $orderItem = GeneralUtility::makeInstance(OrderItem::class);
+        $orderItem->setProduct($product);
+        $orderItem->setAmount(10);
+        $order->addOrderItem($orderItem);
+
+        /** @var \TYPO3\CMS\Extbase\Mvc\Request $request */
+        $request = $this->objectManager->get(Request::class);
+
+        static::assertEquals(
+            'orderManager.message.createdOptIn',
+            $this->subject->createOrder($order, $request, null, true, true)
+        );
+
+        /** @var \RKW\RkwRegistration\Domain\Model\Registration $registration */
+        $registration = $this->registrationRepository->findByUid(1);
+        static::assertInstanceOf('RKW\RkwRegistration\Domain\Model\Registration', $registration);
+        static::assertEquals(1, $registration->getUser());
+        static::assertEquals('rkwShop', $registration->getCategory());
+
+    }
 
 ```
+
 
 ## Links
 * https://codeutopia.net/blog/2015/04/11/what-are-unit-testing-integration-testing-and-functional-testing/
