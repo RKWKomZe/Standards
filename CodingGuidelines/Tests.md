@@ -126,15 +126,16 @@ public function setQueueMailDoesNotAllowNonPersistentQueueMail()
 Tests
     Integration
         Orders  (analog zu "Classes")
-            Database (= XML-Files für die Tests)
-                Global.xml (= enthält allgemeine Datenbank-Einträge, die in SetUp benötigt werden, z.B. die Rootpage)
-                Test10.xml (= enthält Datenban-Einträge für den ersten Test) 
-                Test20.xml ....
-                [...]
-            Frontend
-                Configuration
-                    Rootpage.typoscript (= Rootpage-Setup)
-                Templates (= enthält Templates für das Frontend
+            OrderManagerTest (= Entspricht Test-Klasse)
+                Database (= XML-Files für die Tests)
+                    Check10.xml (= enthält Datenban-Einträge für den ersten Test) 
+                    Check20.xml ...
+                    [...]
+                    Global.xml (= enthält allgemeine Datenbank-Einträge, die in SetUp benötigt werden, z.B. die Rootpage)
+                Frontend
+                    Configuration
+                        Rootpage.typoscript (= Rootpage-Setup)
+                    Templates (= enthält Templates für das Frontend
             OrderManagerTest.php (= Test-File)
 ```
 
@@ -154,7 +155,7 @@ Tests
 </dataset>
 ```
 
-#### Inhalt: Test/Integration/Orders/Database/Check40.xml
+#### Inhalt: Test/Integration/Orders/Database/Test10.xml
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <dataset>
@@ -205,7 +206,7 @@ Tests
          * When I place an order
          * Then the order is saved as registration
          */
-        $this->importDataSet(__DIR__ . '/Fixtures/Database/Check40.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Database/Test10.xml');
 
         /** @var \RKW\RkwShop\Domain\Model\Order $order */
         $order = GeneralUtility::makeInstance(Order::class);
