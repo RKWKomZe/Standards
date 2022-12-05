@@ -20,9 +20,11 @@ Ein Zuviel an Zeilenumbrüchen kann wiederum aber auch die Lesbarkeit des Codes 
 
 Es gelten folgende Regeln:
 * Keine Zeile wird länger als 130 Zeichen
+* Kommentarzeilen sind maximal 80 Zeichen lang
 * Einrückungen (mit 4 Leerzeichen)
 * Kommentierung von wichtigen Passagen/Blöcken des Codes
-* Kommentare werden mit // eingeleitet (kein #!)
+* Kommentare werden mit ``//`` eingeleitet (kein ``#``!)
+* Zwei Leerzeilen zwischen Methoden und zwischen property-Definitionen
 * Codeblöcke werden innerhalb einer Methode sinnvoll durch Leerzeilen gruppiert
 * Eine Leerzeile nach jeder Codezeile ist KEINE sinnvolle Gruppierung :-)
 
@@ -70,16 +72,16 @@ public function findExpiredByFormIdentifier(string $identifier = ''): QueryResul
 
 ## Leerzeichen
 Leerzeichen müssen hinzugefügt werden:
-* Auf beiden Seiten von Zeichenketten, arithmetischen Operatoren, Zuweisungsoperatoren und anderen ähnlichen Operatoren (z. B. ., =, +, -, ?, :, *, usw.).
+* Auf beiden Seiten von Zeichenketten, arithmetischen Operatoren, Zuweisungsoperatoren und anderen ähnlichen Operatoren (z. B. ``.``, ``=``, ``+``, ``-``, ``?``, ``:``, ``*``, usw.).
 * Nach Kommas
 * In einzeiligen Kommentaren nach dem Kommentarzeichen (doppelter Schrägstrich).
 * Nach Sternchen in mehrzeiligen Kommentaren.
-* Nach bedingten Schlüsselwörtern wie if ( und switch (.
-* Vor bedingten Schlüsselwörtern, wenn das Schlüsselwort nicht das erste Zeichen ist, wie } elseif {.
+* Nach bedingten Schlüsselwörtern wie ``if (`` und ``switch (``.
+* Vor bedingten Schlüsselwörtern, wenn das Schlüsselwort nicht das erste Zeichen ist, wie ``} elseif {``.
 
 Leerzeichen dürfen nicht vorhanden sein:
-* Nach einer öffnenden Klammer und vor einer schließenden Klammer. Zum Beispiel: explode( 'blah', 'someblah' ) muss als explode('blah', 'someblah') geschrieben werden.
-  Version)
+* Nach einer öffnenden Klammer und vor einer schließenden Klammer. Zum Beispiel: ``explode( 'blah', 'someblah' )`` muss als ``explode('blah', 'someblah')`` geschrieben werden.
+
 
 ## Geschweifte Klammern
 Die Verwendung von öffnenden und schließenden geschweiften Klammern ist in allen Fällen obligatorisch, 
@@ -122,13 +124,18 @@ Dies ist nicht zuletzt deshalb wichtig, weil klar gesetzte Typen-Deklarationen s
 Es gilt:
 * Abkürzung der Namespace-Pfade zu den Objekten ist möglich, solange der vollständige Pfad in den PHPDocs steht
 * Klare Definition des Typs
-* Vermeidung des mixed-Types
-* Für eine Erleichterung des Test-Driven-Developments: Vermeidung von Methoden ohne Rückgabewerte (void)
+* Vermeidung des ``mixed``-Types
+* Der ``integer``-Typ wird immer mit ``int`` abgekürzt
+* Der ``boolean``-Typ wird immer mit ``bool`` abgekürzt
+* Für eine Erleichterung des Test-Driven-Developments: Vermeidung von Methoden ohne Rückgabewerte (``void``)
 * Auf die Angabe von void als Rückgabewert kann verzichtet werden
 * Angabe des Types nach Möglichkeit auch für properties
+```
+protected float $longitude = 0.0;
+```
 * Setzen von korrekten Standardwerten für properties, die ihrer Typ-Deklaration entsprechen
-* properties, die Objekte beinhalten und standardmäßig null sind, erhalten keine Typ-Deklaration (default ist schon null)
-* @return void ist anzugeben, wenn eine Funktion keinen Wert zurückgibt
+* properties, die Objekte beinhalten und standardmäßig ``null`` sind, erhalten keine Typ-Deklaration (default ist schon ``null``)
+* ``@return void`` ist anzugeben, wenn eine Funktion keinen Wert zurückgibt
 
 ### Negatives Beispiel
 ```
@@ -158,7 +165,7 @@ public function userMail(StandardForm $formRequest):? FrontendUser
 ```
 * Klare Deklaration der Parameter
 * Klare Deklaration des Rückgabewertes
-* über :? wird auch der Fall abgefangen, dass null zurückgegeben wird
+* über ``:?`` wird auch der Fall abgefangen, dass null zurückgegeben wird
 * Geringe Fehleranfälligkeit
 
 ## phpDoc
@@ -172,9 +179,14 @@ Sie dienen dazu, auf einem Blick die relevanten Parameter und Rückgabewerte ein
   4. alles weitere
 * Keine Leerzeilen zwischen den @-Angaben
 * Keine verkürzten Angaben des Namespace-Pfades von Objekten
-* Angabe der PHPDocs auch für properties 
+* Bei Methoden: verpflichtende Angabe des Rückgabewertes. Ist dieser leer, dann ``@return void``
+* Angabe der phpDocs auch für properties 
 * Verzicht auf Angabe des property-Namens bei properties (Redundanz vermeiden)
 * Wird innerhalb einer Methode eine Variable zugewiesen, so ist auch für diese eine phpDoc-Angabe an Ort und stelle und nach den hier definierten Regeln zu machen
+``` 
+/** @var \TYPO3\CMS\Core\Configuration\Loader\YamlFileLoader $yamlFileLoader */
+$yamlFileLoader = GeneralUtility::makeInstance(YamlFileLoader::class);
+```
 
 ### Negatives Beispiel
 ```
@@ -197,10 +209,10 @@ protected function getFieldsLayout($fieldsets)
 * Redundante Angabe des property-Namens
 * Definition des Properties als null ist unnötig
 * Keine Beschreibung der Methode
-* @throws an falscher Stelle
-* @throws zu allgemein - welcher Fehler wird genau geworfen?
+* ``@throws`` an falscher Stelle
+* ``@throws`` zu allgemein - welcher Fehler wird genau geworfen?
 * Parameter-Angabe gibt keinerlei Hinweis auf den Typ
-* Leerzeichen zwischen @param und @return
+* Leerzeichen zwischen ``@param`` und ``@return``
 * Keinerlei Hinweise auf den zu erwartenden Rückgabewert
 
 ### Positives Beispiel
@@ -218,6 +230,6 @@ public function findExpiredByFormIdentifier(string $identifier = ''):? QueryResu
 * @tags in richtiger Reihenfolge
 * Keine unnötigen Leerzeilen zwischen den @tags
 * Konkrete und absolute Angabe des Rückgabewertes
-* Berücksichtigung des alternativen Rückgabewertes (null)
+* Berücksichtigung des alternativen Rückgabewertes (``null``)
 * Konkrete und absolute Angabe des Fehlerwertes
 

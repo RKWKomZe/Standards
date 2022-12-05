@@ -40,7 +40,7 @@ if ($this->getSomeCondition($this->getSomeVariable())
 }
 ```
 
-Der ternäre Bedingungsoperator ? : darf nur verwendet werden, wenn er genau zwei mögliche Ergebnisse hat.
+Der ternäre Bedingungsoperator ``? :`` darf nur verwendet werden, wenn er genau zwei mögliche Ergebnisse hat.
 Beispiel:
 ```
 $result = ($useComma ? ',' : '.');
@@ -98,8 +98,8 @@ while (($fields = $this->getFields())) {
     // Do something
 }
 ```
-Es gibt einen Sonderfall für foreach-Schleifen, wenn der Wert nicht innerhalb der Schleife verwendet wird. 
-In diesem Fall wird die Dummy-Variable $_ (Unterstrich) verwendet:
+Es gibt einen Sonderfall für ``foreach``-Schleifen, wenn der Wert nicht innerhalb der Schleife verwendet wird. 
+In diesem Fall wird die Dummy-Variable ``$_`` (Unterstrich) verwendet:
 ```
 foreach ($GLOBALS['TCA'] as $table => $_) {
     // Do something with $table
@@ -143,7 +143,7 @@ Außerdem sollten sie in Kleinbuchstaben geschrieben werden, d.h. ``true`` und `
 Auch dieser spezielle Wert wird in Kleinbuchstaben geschrieben, d.h. ``null``.
 
 ## Arrays
-Array-Deklarationen verwenden die kurze Array-Syntax [] anstelle des Schlüsselworts "array". Also
+Array-Deklarationen verwenden die kurze Array-Syntax ``[]`` anstelle des Schlüsselworts ``array``. Also
 ```
 $a = [];
 ```
