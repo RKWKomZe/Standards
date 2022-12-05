@@ -23,7 +23,7 @@ Es gelten folgende Regeln:
 * Kommentarzeilen sind maximal 80 Zeichen lang
 * Einrückungen (mit 4 Leerzeichen)
 * Kommentierung von wichtigen Passagen/Blöcken des Codes
-* Kommentare werden mit ``//`` eingeleitet (kein ``#!``)
+* Kommentare werden mit ``//`` eingeleitet (kein ``#``!)
 * Zwei Leerzeilen zwischen Methoden und zwischen property-Definitionen
 * Codeblöcke werden innerhalb einer Methode sinnvoll durch Leerzeilen gruppiert
 * Eine Leerzeile nach jeder Codezeile ist KEINE sinnvolle Gruppierung :-)
@@ -72,16 +72,16 @@ public function findExpiredByFormIdentifier(string $identifier = ''): QueryResul
 
 ## Leerzeichen
 Leerzeichen müssen hinzugefügt werden:
-* Auf beiden Seiten von Zeichenketten, arithmetischen Operatoren, Zuweisungsoperatoren und anderen ähnlichen Operatoren (z. B. ., =, +, -, ?, :, *, usw.).
+* Auf beiden Seiten von Zeichenketten, arithmetischen Operatoren, Zuweisungsoperatoren und anderen ähnlichen Operatoren (z. B. ``.``, ``=``, ``+``, ``-``, ``?``, ``:``, ``*``, usw.).
 * Nach Kommas
 * In einzeiligen Kommentaren nach dem Kommentarzeichen (doppelter Schrägstrich).
 * Nach Sternchen in mehrzeiligen Kommentaren.
-* Nach bedingten Schlüsselwörtern wie if ( und switch (.
-* Vor bedingten Schlüsselwörtern, wenn das Schlüsselwort nicht das erste Zeichen ist, wie } elseif {.
+* Nach bedingten Schlüsselwörtern wie ``if (`` und ``switch (``.
+* Vor bedingten Schlüsselwörtern, wenn das Schlüsselwort nicht das erste Zeichen ist, wie ``} elseif {``.
 
 Leerzeichen dürfen nicht vorhanden sein:
-* Nach einer öffnenden Klammer und vor einer schließenden Klammer. Zum Beispiel: explode( 'blah', 'someblah' ) muss als explode('blah', 'someblah') geschrieben werden.
-  Version)
+* Nach einer öffnenden Klammer und vor einer schließenden Klammer. Zum Beispiel: ``explode( 'blah', 'someblah' )`` muss als ``explode('blah', 'someblah')`` geschrieben werden.
+
 
 ## Geschweifte Klammern
 Die Verwendung von öffnenden und schließenden geschweiften Klammern ist in allen Fällen obligatorisch, 
@@ -128,14 +128,13 @@ Es gilt:
 * Der ``integer``-Typ wird immer mit ``int`` abgekürzt
 * Der ``boolean``-Typ wird immer mit ``bool`` abgekürzt
 * Für eine Erleichterung des Test-Driven-Developments: Vermeidung von Methoden ohne Rückgabewerte (``void``)
-* Auf die Angabe von void als Rückgabewert kann verzichtet werden
+* Auf die Angabe von void als Rückgabewert kann verzichtet werden, es wird aber die Angabe empfohlen
 * Angabe des Types nach Möglichkeit auch für properties
 ```
 protected float $longitude = 0.0;
 ```
 * Setzen von korrekten Standardwerten für properties, die ihrer Typ-Deklaration entsprechen
 * properties, die Objekte beinhalten und standardmäßig ``null`` sind, erhalten keine Typ-Deklaration (default ist schon ``null``)
-* ``@return void`` ist anzugeben, wenn eine Funktion keinen Wert zurückgibt
 
 ### Negatives Beispiel
 ```
