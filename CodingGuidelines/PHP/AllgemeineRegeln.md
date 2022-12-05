@@ -134,7 +134,7 @@ Es gilt:
 protected float $longitude = 0.0;
 ```
 * Setzen von korrekten Standardwerten für properties, die ihrer Typ-Deklaration entsprechen
-* properties, die Objekte beinhalten und standardmäßig ``null`` sind, erhalten keine Typ-Deklaration (default ist schon ``null``)
+* properties, die Objekte beinhalten und standardmäßig ``null`` sind, erhalten keinen Standardwert (default ist schon ``null``)
 
 ### Negatives Beispiel
 ```
