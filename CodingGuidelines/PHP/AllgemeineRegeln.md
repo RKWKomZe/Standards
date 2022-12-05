@@ -128,14 +128,13 @@ Es gilt:
 * Der ``integer``-Typ wird immer mit ``int`` abgekürzt
 * Der ``boolean``-Typ wird immer mit ``bool`` abgekürzt
 * Für eine Erleichterung des Test-Driven-Developments: Vermeidung von Methoden ohne Rückgabewerte (``void``)
-* Auf die Angabe von void als Rückgabewert kann verzichtet werden
+* Auf die Angabe von void als Rückgabewert kann verzichtet werden, es wird aber die Angabe empfohlen
 * Angabe des Types nach Möglichkeit auch für properties
 ```
 protected float $longitude = 0.0;
 ```
 * Setzen von korrekten Standardwerten für properties, die ihrer Typ-Deklaration entsprechen
-* properties, die Objekte beinhalten und standardmäßig ``null`` sind, erhalten keine Typ-Deklaration (default ist schon ``null``)
-* ``@return void`` ist anzugeben, wenn eine Funktion keinen Wert zurückgibt
+* properties, die Objekte beinhalten und standardmäßig ``null`` sind, erhalten keinen Standardwert (default ist schon ``null``)
 
 ### Negatives Beispiel
 ```
