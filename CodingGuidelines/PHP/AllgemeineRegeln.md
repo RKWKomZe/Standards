@@ -128,7 +128,7 @@ Es gilt:
 * Der ``integer``-Typ wird immer mit ``int`` abgekürzt
 * Der ``boolean``-Typ wird immer mit ``bool`` abgekürzt
 * Für eine Erleichterung des Test-Driven-Developments: Vermeidung von Methoden ohne Rückgabewerte (``void``)
-* Auf die Angabe von void als Rückgabewert kann verzichtet werden, es wird aber die Angabe empfohlen
+* Bei Methoden ohne Rückgabewert ist Angabe von ``void`` als Rückgabewert verpflichtend
 * Angabe des Types nach Möglichkeit auch für properties
 ```
 protected float $longitude = 0.0;
