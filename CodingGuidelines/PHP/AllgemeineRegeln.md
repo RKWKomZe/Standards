@@ -129,7 +129,7 @@ Es gilt:
 * Der ``boolean``-Typ wird immer mit ``bool`` abgekürzt
 * Für eine Erleichterung des Test-Driven-Developments: Vermeidung von Methoden ohne Rückgabewerte (``void``)
 * Bei Methoden ohne Rückgabewert ist Angabe von ``void`` als Rückgabewert verpflichtend
-* Angabe des Types nach Möglichkeit auch für properties
+* Angabe des Types immer auch für properties
 ```
 protected float $longitude = 0.0;
 ```
