@@ -137,8 +137,10 @@ protected float $longitude = 0.0;
 * properties, die Objekte beinhalten und standardmäßig ``null`` sind, erhalten ebenfalls einen Standardwert, weil sonst die Prüfung scheitert (default ist  ``undefined``). Dabei kann auch hier das Fragezeichen helfen. Im Beispiel: FrontendUser oder null. Standardwert ist null.
 ```
 public ?FrontendUser $frontendUser = null;
+```NICHT mit Fragezeichen und null instanziert werden. Hier genügt:
 ```
-
+public FrontendUser $frontendUser;
+```
 ### Negatives Beispiel
 ```
 /**
