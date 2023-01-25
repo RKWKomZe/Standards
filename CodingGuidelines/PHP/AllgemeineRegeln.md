@@ -137,7 +137,8 @@ protected float $longitude = 0.0;
 * properties, die Objekte beinhalten und standardmäßig ``null`` sind, erhalten ebenfalls einen Standardwert, weil sonst die Prüfung scheitert (default ist  ``undefined``). Dabei kann auch hier das Fragezeichen helfen. Im Beispiel: FrontendUser oder null. Standardwert ist null.
 ```
 public ?FrontendUser $frontendUser = null;
-```NICHT mit Fragezeichen und null instanziert werden. Hier genügt:
+```
+* properties, die Objekte beinhalten und injected werden (z.B. via TYPO3 PHPDocs @TYPO3\CMS\Extbase\Annotation\Inject) müssen in der Regel NICHT mit ``null`` instanziert werden. Hier genügt:
 ```
 public FrontendUser $frontendUser;
 ```
