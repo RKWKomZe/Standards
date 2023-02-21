@@ -19,7 +19,23 @@ Damit der Code gut lesbar ist, gehören einerseits Kommentare dazu, andererseits
 Ein Zuviel an Zeilenumbrüchen kann wiederum aber auch die Lesbarkeit des Codes erheblich beeinträchtigen.
 
 Es gelten folgende Regeln:
-* Keine Zeile wird länger als 130 Zeichen
+* Keine Zeile wird länger als 130 Zeichen - Ausnahme: Wenn durch Umbruch Übersichtlichkeit leidet, z. B. bei initalizeArguments in ViewHelpern: 
+```
+    /**
+     * Initialize arguments.
+     *
+     * @return void
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments(): void
+    {
+        parent::initializeArguments();
+        $this->registerArgument('key', 'string', 'The key to use for the text.', false, 'default');
+        $this->registerArgument('pageUid', 'int', 'The pid of the first page which will be linked.', false, '0');
+        $this->registerArgument('pageUid2', 'int', 'The pid of the second page which will be linked.', false, '0');
+        $this->registerArgument('type', 'string', 'The type. Allowed values are: privacy, terms, marketing.', false, 'privacy');
+    }
+```
 * Kommentarzeilen sind maximal 80 Zeichen lang
 * Einrückungen (mit 4 Leerzeichen)
 * Kommentierung von wichtigen Passagen/Blöcken des Codes
