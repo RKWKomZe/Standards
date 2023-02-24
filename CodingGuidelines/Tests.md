@@ -132,6 +132,13 @@ public function setQueueMailDoesNotAllowNonPersistentQueueMail()
 * Sofern ein Test auf Fixtures angewiesen ist, werden diese nicht global im SetupUp definiert, sondern für die Erhaltung der Übersichtlichkeit im jeweiligen Test geladen.
 * Die XML-Dateien für die Datenbank-Daten sollten nicht nach Tabellennamen, sondern nach Tests aufgeteilt sein, sodass alle Datenbank-Daten (über verschiedene Tabellen) für einen Test (oder einer Gruppe von Tests, die die gleichen Daten verwenden) in einer Datei liegen. Dies verhindert auch versehentliche Überschneidungen in Datensätzen und erhöht die Übersichtlichkeit.
 * Die Benennung der Dateien ist weitgehend frei, sofern eine Zuordung des Fixture-Files zum Test in irgendeiner Weise möglich bleibt.
+* Der Pfad zu den Fixture-Files wird in der Test-Klasse als Konstante definiert und ausschließlich verwendet:
+```
+    /**
+     * @const
+     */
+    const FIXTURE_PATH = __DIR__ . '/CalculationViewHelperTest/Fixtures';
+```
 * Die im nachfolgenden Beispiel gezeigte Ordner-Struktur hat sich bewährt 
 
 ### Beispiel: TYPO3 Integration-Test
@@ -220,7 +227,7 @@ Tests
          * When I place an order
          * Then the order is saved as registration
          */
-        $this->importDataSet(__DIR__ . '/Fixtures/Database/Test10.xml');
+        $this->importDataSet(self::FIXTURE_PATH . '/Database/Test10.xml');
 
         /** @var \RKW\RkwShop\Domain\Model\Order $order */
         $order = GeneralUtility::makeInstance(Order::class);
