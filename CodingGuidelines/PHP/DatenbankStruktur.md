@@ -16,7 +16,7 @@ CREATE TABLE tx_feregister_domain_model_consent
 	child                  int(11) DEFAULT '0',
 
 	frontend_user          int(11) DEFAULT '0',
-	opt_in     			   int(11) DEFAULT '0',
+	opt_in                 int(11) DEFAULT '0',
 
 	PRIMARY KEY (uid),
 	KEY                    parent (pid),
