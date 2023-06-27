@@ -14,6 +14,14 @@ Folgende Dateistruktur wird festgelegt:
 7. Optionaler Code
 8. KEIN schließender PHP-Tag
 
+## Properties, Methoden, Constructor, Destructor, Magic Methods
+Folgende Struktur wird innerhalb von Klassen festgelegt:
+1. Properties
+2. Constructor
+3. Methoden
+4. Magic Methods
+5. Destructor
+
 ## Lesbarkeit & Kommentare
 Damit der Code gut lesbar ist, gehören einerseits Kommentare dazu, andererseits aber auch eine sinnvolle Gruppierung der Codezeilen durch Zeilenumbrüche und Einrückungen.
 Ein Zuviel an Zeilenumbrüchen kann wiederum aber auch die Lesbarkeit des Codes erheblich beeinträchtigen.
@@ -27,6 +35,11 @@ Es gelten folgende Regeln:
 * Zwei Leerzeilen zwischen Methoden und zwischen property-Definitionen
 * Codeblöcke werden innerhalb einer Methode sinnvoll durch Leerzeilen gruppiert
 * Eine Leerzeile nach jeder Codezeile ist KEINE sinnvolle Gruppierung :-)
+* Klassen werden nicht über ``\\`` als String (z.B. ``TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings``, sondern über ::class referenziert
+```
+/** @var \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings $querySettings */
+$querySettings = $this->objectManager->get(Typo3QuerySettings::class);
+```
 
 ### Negatives Beispiel
 ```
@@ -129,9 +142,30 @@ Es gilt:
 * Der ``boolean``-Typ wird immer mit ``bool`` abgekürzt
 * Für eine Erleichterung des Test-Driven-Developments: Vermeidung von Methoden ohne Rückgabewerte (``void``)
 * Bei Methoden ohne Rückgabewert ist Angabe von ``void`` als Rückgabewert verpflichtend
-* Angabe des Types nach Möglichkeit auch für properties
+* Angabe des Types auch für properties
+* Werden properties mit Objekten nicht injected und können daher ``null`` sein, hilft auch hier ``?``
+* Werden properties mit Objekten injected, ist ``null`` als Default-Wert eigentlich nicht möglich. Hier muss``?`` entfallen. 
 ```
+/**
+ * @var \Madj2k\CoreExtended\Cache\SitemapCache
+ * @TYPO3\CMS\Extbase\Annotation\Inject
+ */
+protected SitemapCache $cache;
+
+/**
+ * @var \TYPO3\CMS\Core\Log\Logger|null
+ */
+protected ?Logger $logger;
+
+/**
+ * float
+ */
 protected float $longitude = 0.0;
+
+/**
+ * @var array
+ */
+protected array $cache = [];
 ```
 * Setzen von korrekten Standardwerten für properties, die ihrer Typ-Deklaration entsprechen
 * properties, die Objekte beinhalten und standardmäßig ``null`` sind, erhalten keinen Standardwert (default ist schon ``null``)

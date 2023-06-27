@@ -7,6 +7,7 @@ Ferner gelten die weiterführenden Hinweise dieser Dokumentation.
 ### PHP
 - [Allgemeine Regeln](CodingGuidelines/PHP/AllgemeineRegeln.md)
 - [Sprachkonstrukte](CodingGuidelines/PHP/Sprachkonstrukte.md)
+- [Datenbank-Struktur](CodingGuidelines/PHP/DatenbankStruktur.md)
 
 ### Tests
 - [Allgemeine Regeln](CodingGuidelines/Tests.md)
