@@ -142,9 +142,7 @@ Es gilt:
 * Der ``boolean``-Typ wird immer mit ``bool`` abgekürzt
 * Für eine Erleichterung des Test-Driven-Developments: Vermeidung von Methoden ohne Rückgabewerte (``void``)
 * Bei Methoden ohne Rückgabewert ist Angabe von ``void`` als Rückgabewert verpflichtend
-* Angabe des Types auch für properties
-* Werden properties mit Objekten nicht injected und können daher ``null`` sein, hilft auch hier ``?``
-* Werden properties mit Objekten injected, ist ``null`` als Default-Wert eigentlich nicht möglich. Hier muss``?`` entfallen. 
+* Angabe des Types immer auch für properties
 ```
 /**
  * @var \Madj2k\CoreExtended\Cache\SitemapCache
@@ -168,8 +166,14 @@ protected float $longitude = 0.0;
 protected array $cache = [];
 ```
 * Setzen von korrekten Standardwerten für properties, die ihrer Typ-Deklaration entsprechen
-* properties, die Objekte beinhalten und standardmäßig ``null`` sind, erhalten keinen Standardwert (default ist schon ``null``)
-
+* properties, die Objekte beinhalten und standardmäßig ``null`` sind, erhalten ebenfalls einen Standardwert, weil sonst die Prüfung scheitert (default ist  ``undefined``). Dabei kann auch hier das Fragezeichen helfen. Im Beispiel: FrontendUser oder null. Standardwert ist null.
+```
+public ?FrontendUser $frontendUser = null;
+```
+* properties, die Objekte beinhalten und injected werden (z.B. via TYPO3 PHPDocs @TYPO3\CMS\Extbase\Annotation\Inject) müssen in der Regel NICHT mit ``null`` instanziert werden. Hier genügt:
+```
+public FrontendUser $frontendUser;
+```
 ### Negatives Beispiel
 ```
 /**
