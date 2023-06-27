@@ -47,7 +47,7 @@ CREATE TABLE tx_postmaster_domain_model_queuemail (
 );
 ```
 ## STRICT_TRANS_TABLES deaktivieren
-Sollte man mit einem Setup arbeiten müssen, dass auch ältere Extensions enthält, kann temporär folgende Einstellung in der my.cnf unter /etc/mysql vorgenommen werden
+Sollte man mit einem Setup arbeiten müssen, das auch ältere Extensions enthält, kann temporär folgende Einstellung in der _my.cnf_ unter _/etc/mysql_ vorgenommen werden
 (ACHTUNG: Variationen bei verschiedenen Versionen von MySQL!)
 ```
 [mysqld]
