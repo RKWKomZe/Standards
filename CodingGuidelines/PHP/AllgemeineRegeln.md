@@ -7,8 +7,8 @@ Ferner gelten die weiterführenden Hinweise dieser Dokumentation
 Folgende Dateistruktur wird festgelegt:
 1. Öffnender PHP-Tag
 2. strict_types-Deklaration (zweite Zeile)
-3. Copyright-Hinweis
-4. Namespace
+3. Namespace
+4. Copyright-Hinweis
 5. Namespace-Importe
 6. Klasseninformationsblock im phpDoc Format
 7. PHP-Klasse
