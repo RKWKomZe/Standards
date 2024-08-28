@@ -6,7 +6,7 @@ Ferner gelten die weiterführenden Hinweise dieser Dokumentation
 ## Dateistruktur
 Folgende Dateistruktur wird festgelegt:
 1. Öffnender PHP-Tag
-2. trict_types-Deklaration (zweite Zeile)
+2. strict_types-Deklaration (zweite Zeile)
 3. Copyright-Hinweis
 4. Namespace
 5. Namespace-Importe
