@@ -7,13 +7,13 @@ Ferner gelten die weiterführenden Hinweise dieser Dokumentation
 Folgende Dateistruktur wird festgelegt:
 1. Öffnender PHP-Tag
 2. strict_types-Deklaration (zweite Zeile)
-3. Namespace
 4. Copyright-Hinweis
-5. Namespace-Importe
-6. Klasseninformationsblock im phpDoc Format
-7. PHP-Klasse
-8. Optionaler Code
-9. KEIN schließender PHP-Tag
+5. Namespace
+6. Namespace-Importe
+7. Klasseninformationsblock im phpDoc Format
+8. PHP-Klasse
+9. Optionaler Code
+10. KEIN schließender PHP-Tag
 
 ## Properties, Methoden, Constructor, Destructor, Magic Methods
 Folgende Struktur wird innerhalb von Klassen festgelegt:
